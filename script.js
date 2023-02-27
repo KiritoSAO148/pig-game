@@ -11,13 +11,25 @@ const btnNewEl = document.querySelector('.btn--new');
 const btnRollEl = document.querySelector('.btn--roll');
 const btnHoldEl = document.querySelector('.btn--hold');
 
-const scores = [0, 0];
-score0El.textContent = 0;
-score1El.textContent = 0;
-let currentPlayer = 0;
-let ok = true;
+let scores, currentScore, currentPlayer, ok;
 
-let currentScore = 0;
+const init = function () {
+  ok = true;
+  scores = [0, 0];
+  currentScore = 0;
+  currentPlayer = 0;
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  currentScore0.textContent = 0;
+  currentScore1.textContent = 0;
+  diceEl.classList.add('hidden');
+  currentPlayer0El.classList.remove('player--winner');
+  currentPlayer1El.classList.remove('player--winner');
+  currentPlayer0El.classList.add('player--active');
+  currentPlayer1El.classList.remove('player--active');
+};
+
+init();
 
 diceEl.classList.add('hidden');
 
@@ -65,22 +77,4 @@ btnHoldEl.addEventListener('click', function () {
   }
 });
 
-btnNewEl.addEventListener('click', function () {
-  ok = true;
-  scores[0] = 0;
-  scores[1] = 0;
-  currentScore = 0;
-  currentPlayer = 0;
-  score0El.textContent = 0;
-  score1El.textContent = 0;
-  currentScore0.textContent = 0;
-  currentScore1.textContent = 0;
-  diceEl.classList.add('hidden');
-  if (currentPlayer0El.classList.contains('player--winner'))
-    currentPlayer0El.classList.remove('player--winner');
-  else if (currentPlayer1El.classList.contains('player--winner'))
-    currentPlayer1El.classList.remove('player--winner');
-  currentPlayer0El.classList.add('player--active');
-  if (currentPlayer1El.classList.contains('player--active'))
-    currentPlayer1El.classList.remove('player--active');
-});
+btnNewEl.addEventListener('click', init);
